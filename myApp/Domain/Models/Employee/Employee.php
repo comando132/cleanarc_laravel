@@ -12,7 +12,7 @@ final class Employee {
     public $jobTitle;
 
     public function __construct(?int $employeeNumber, string $firstName, string $lastName, ?string $extension,
-                                int $email, string $officeCode, ?string $reportsTo, ?string $jobTitle) {
+                                string $email, string $officeCode, ?int $reportsTo, ?string $jobTitle) {
         $this->setEmployeeNumber($employeeNumber);
         $this->setFirstName($firstName);
         $this->setLastName($lastName);
@@ -87,6 +87,19 @@ final class Employee {
 
     public function getJobTitle() :string {
         return $this->jobTitle;
+    }
+
+    public function toArray(): array{
+        return [
+            'employeeNumber' => $this->employeeNumber,
+            'firstName' => $this->firstName,
+            'lastName' => $this->lastName,
+            'extension' => $this->extension,
+            'email' => $this->email,
+            'officeCode' => $this->officeCode,
+            'reportsTo' => $this->reportsTo,
+            'jobTitle' => $this->jobTitle
+        ];
     }
 
 }
