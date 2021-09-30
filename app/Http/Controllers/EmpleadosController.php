@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ViewModels\EmpleadosViewModel;
 use Illuminate\Http\Request;
 use MyApp\Application\UseCases\AddEmployees\AddEmployee;
 use MyApp\Application\UseCases\AddEmployees\AddEmployeeRequest;
@@ -20,9 +21,8 @@ class EmpleadosController extends Controller
 
     public function index() {
         $employees = $this->empRepo->list();
-        $this->response->setResponse(Response::RESPONSE_OK);
-        $this->response->setData($employees);
-        return response()->json($this->response->getArrayResponse());
+        $viewModel = new EmpleadosViewModel($employees);
+        return view('empleados.index', $viewModel);
     }
 
     public function detalle($id) {

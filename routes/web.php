@@ -19,3 +19,9 @@ Route::get('/', function () {
 });
 
 
+Route::get("/empleados", [EmpleadosController::class, "index"])->name('lista-empleados');
+Route::get("/empleado/detalle/{id}", [EmpleadosController::class, "detalle"])->name('detalle-empleado');
+Route::post("/empleado/guardar", [EmpleadosController::class, "guardar"])->name('guardar-empleado');
+Route::post("/empleado/nuevo", [EmpleadosController::class, "nuevo"])->name('nuevo-empleado');
+Route::post("/empleado/editar/{id}", [EmpleadosController::class, "nuevo"])->name('editar-empleado');
+Route::post("/empleado/borrar/{id}", [EmpleadosController::class, "nuevo"])->name('borrar-empleado');
