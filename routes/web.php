@@ -18,5 +18,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get("/empleados", [EmpleadosController::class, "index"]);
-Route::get("/empleado/detalle/{id}", [EmpleadosController::class, "detalle"]);
+

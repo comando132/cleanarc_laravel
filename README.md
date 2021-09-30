@@ -62,3 +62,19 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+##Integrando Arquitectura Limpia
+En el archivo `composer.json` ubicar la línea autoload psr-4 y agregar el nombre de tu carpeta
+```
+"autoload": {
+    "psr-4": {
+        "${namespace}\\": "${directorio}",        
+    }
+}
+```
+Por último para que reconozca las clases realizadas debemos correr el siguiente comando:
+```sh
+ composer dump-autoload
+```
+Nota:
+Si omitimos este paso nos podría salir un error de que alguna clase no esté definida.

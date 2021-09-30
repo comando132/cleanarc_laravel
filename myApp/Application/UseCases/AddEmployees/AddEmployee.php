@@ -1,30 +1,29 @@
 <?php
 namespace MyApp\Application\UseCases\AddEmployees;
 
-use MyApp\Application\UseCases\AddEmployee\AddEmployeeResponse;
-use MyApp\Application\UseCases\AddEmployee\AddEmployeeRequest;
 use MyApp\Domain\Models\Employee\Employee;
 use MyApp\Domain\Models\Employee\EmployeeRepository;
 
 class AddEmployee {
-    private $empRepo;
+    private $employeeRepo;
     private $response;
     private $request;
 
 
     public function __construct(EmployeeRepository $EmployeesRepo) {
-        $this->EmployeesRepo = $EmployeesRepo;
+        $this->employeeRepo = $EmployeesRepo;
         $this->response = new AddEmployeeResponse();
         $this->request = new AddEmployeeRequest();
     }
 
 
     public function __invoke(AddEmployeeRequest $request) {
-        $Employee = $this->__requestToEmployee($request);
+        $employee = $this->__requestToEmployee($request);
         try {
-            $this->EmployeeRepo->save($Employee);
-            $this->response->response(true, null, $Employee->toArray());
+            $this->employeeRepo->save($employee);
+            $this->response->response(true, null, $employee->toArray());
         } catch (\Exception $e) {
+            dd($e->getMessage());
             $this->response->response(false, $e->getMessage());
         }
         return $this->response->getArrayResponse();

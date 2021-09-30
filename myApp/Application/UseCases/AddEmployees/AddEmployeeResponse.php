@@ -1,5 +1,5 @@
 <?php
-namespace MyApp\Application\UseCases\AddEmployee;
+namespace MyApp\Application\UseCases\AddEmployees;
 
 use MyApp\Application\UseCases\Response;
 

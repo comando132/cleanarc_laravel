@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EmpleadosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get("/empleados", [EmpleadosController::class, "index"]);
+Route::get("/empleado/detalle/{id}", [EmpleadosController::class, "detalle"]);
+Route::post("/empleado/guardar", [EmpleadosController::class, "guardar"]);

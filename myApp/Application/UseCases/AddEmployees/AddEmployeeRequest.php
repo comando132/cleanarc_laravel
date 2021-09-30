@@ -1,5 +1,5 @@
 <?php
-namespace MyApp\Application\UseCases\AddEmployee;
+namespace MyApp\Application\UseCases\AddEmployees;
 
 
 class AddEmployeeRequest {
@@ -11,6 +11,14 @@ class AddEmployeeRequest {
     protected $officeCode;
     protected $reportsTo;
     protected $jobTitle;
+
+    public function setEmployeeRequest(array $data) :void {
+        foreach ($data as $key => $val) {
+            if (property_exists($this, $key)) {
+                $this->{$key} = $val;
+            }
+        }
+    }
 
     public function setEmployeeNumber(?int $employeeNumber) :void {
         $this->employeeNumber = $employeeNumber;

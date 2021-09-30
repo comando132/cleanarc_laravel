@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use MyApp\Application\UseCases\AddEmployees\AddEmployee;
 use MyApp\Application\UseCases\AddEmployees\AddEmployeeRequest;
 use MyApp\Application\UseCases\AddEmployees\AddEmployeeResponse;
+
 use MyApp\Application\UseCases\Response;
 use MyApp\Domain\Models\Employee\EmployeeRepository;
 
@@ -17,7 +18,7 @@ class EmpleadosController extends Controller
 
     }
 
-    public function index(){
+    public function index() {
         $employees = $this->empRepo->list();
         $this->response->setResponse(Response::RESPONSE_OK);
         $this->response->setData($employees);
@@ -37,10 +38,17 @@ class EmpleadosController extends Controller
         }
     }
 
+
     public function guardar(Request $request, AddEmployee $useCase) {
-        $addUserRequest = $this->__createAddUserRequest($request);
+        $addUserRequest = $this->__createAddRequest($request);
         $response = $useCase($addUserRequest);
         $httpResponse = ($response['response']) ? 200 : 500 ;
         return response()->json($response, $httpResponse);
+    }
+
+    private function __createAddRequest(Request $request) {
+        $addReq = new AddEmployeeRequest();
+        $addReq->setEmployeeRequest($request->all());
+        return $addReq;
     }
 }
