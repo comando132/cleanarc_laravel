@@ -31,7 +31,7 @@ class AddEmployee {
     }
 
     /**
-     * Método que convierte un AddEmployeeREquest en un modelo de Employee para guardarlo
+     * Método que convierte un AddEmployeeRequest en un modelo de Employee para guardarlo
      * @param AddEmployeeRequest $EmployeeRequest recibe un AddEmployeeRequest
      * @return Employee regresa una instancia de Domain/Models/Employee Usuario
      */

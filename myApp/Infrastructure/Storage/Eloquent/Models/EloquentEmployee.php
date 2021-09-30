@@ -7,6 +7,7 @@ use MyApp\Domain\Models\Employee\Employee;
 class EloquentEmployee extends AppEloquent implements Domainable {
 
     protected $table = 'employees';
+    protected $primaryKey = 'employeeNumber';
     protected $fillable = [
         'lastName', 'firstName', 'extension',
         'email', 'officeCode', 'reportsTo', 'jobTitle'

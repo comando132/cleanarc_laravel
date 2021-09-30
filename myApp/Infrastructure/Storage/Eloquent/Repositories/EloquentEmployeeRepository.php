@@ -1,7 +1,6 @@
 <?php
 namespace MyApp\Infrastructure\Storage\Eloquent\Repositories;
 
-use Illuminate\Database\QueryException;
 use MyApp\Domain\Models\Domainable;
 use MyApp\Domain\Models\Employee\Employee;
 use MyApp\Domain\Models\Employee\EmployeeRepository;
@@ -16,17 +15,14 @@ class EloquentEmployeeRepository implements EmployeeRepository {
     }
 
     public function list(): Collection {
-        return $this->eloquent->orderBy('id')->get()->map(function (Domainable $elo) {
+        return $this->eloquent->orderBy('employeeNumber')->get()->map(function (Domainable $elo) {
             return $elo->list();
         });
     }
 
     public function detail(int $id): Employee {
         $emp = $this->eloquent->find($id);
-        if (empty($$emp)) {
-            return null;
-        }
-        return $user->toDomain();
+        return $emp->toDomain();
     }
 
     public function save(Employee $emp): bool {
