@@ -10,7 +10,7 @@
 </head>
 <body cz-shortcut-listen="true">
         <!-- Begin page content -->
-        <header>
+        <header style="margin-bottom:80px">
             <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>

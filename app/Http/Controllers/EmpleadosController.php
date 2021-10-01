@@ -2,27 +2,42 @@
 
 namespace App\Http\Controllers;
 
-use App\ViewModels\EmpleadosViewModel;
 use Illuminate\Http\Request;
+use App\ViewModels\EmpleadosViewModel;
+use MyApp\Application\UseCases\Response;
+use App\ViewModels\FormularioEmpleadoViewModel;
+use MyApp\Domain\Models\Employee\OfficeRepository;
+
+use MyApp\Domain\Models\Employee\EmployeeRepository;
 use MyApp\Application\UseCases\AddEmployees\AddEmployee;
 use MyApp\Application\UseCases\AddEmployees\AddEmployeeRequest;
 use MyApp\Application\UseCases\AddEmployees\AddEmployeeResponse;
 
-use MyApp\Application\UseCases\Response;
-use MyApp\Domain\Models\Employee\EmployeeRepository;
-
 class EmpleadosController extends Controller
 {
-    public function __construct(EmployeeRepository $empRepo) {
+    public function __construct(EmployeeRepository $empRepo, OfficeRepository $officeRepo) {
         $this->empRepo = $empRepo;
-        $this->response =  new Response();
-
+        $this->officeRepo = $officeRepo;
     }
 
     public function index() {
         $employees = $this->empRepo->list();
         $viewModel = new EmpleadosViewModel($employees);
         return view('empleados.index', $viewModel);
+    }
+
+    public function nuevo($id = null) {
+        $employee = [];
+
+        if ($id != null){
+            $employee = $this->empRepo->detail($id); 
+        }
+
+        $chiefs = $this->empRepo->list();
+        $offices = $this->officeRepo->list();
+
+        $viewModel = new FormularioEmpleadoViewModel($employee, $chiefs, $offices);
+        return view('empleados.nuevo', $viewModel);
     }
 
     public function detalle($id) {
@@ -38,17 +53,32 @@ class EmpleadosController extends Controller
         }
     }
 
-
     public function guardar(Request $request, AddEmployee $useCase) {
         $addUserRequest = $this->__createAddRequest($request);
         $response = $useCase($addUserRequest);
-        $httpResponse = ($response['response']) ? 200 : 500 ;
-        return response()->json($response, $httpResponse);
+
+        if($response['response'] == Response::RESPONSE_OK) {
+            return redirect()->route('lista-empleados')->with('success', 'Se guardó el empleado exitosamente');
+        }
+
+        return back()->withInput()->with('error','Ocurrió un error al guardar el empleado');
+    }
+
+    public function editar(Request $request, EditEmployee $useCase){
+        $editUserReq = $this->__createEditRequest($request);
+        $response = $useCase($editUserReq);
+        return response()->json($response);
     }
 
     private function __createAddRequest(Request $request) {
         $addReq = new AddEmployeeRequest();
         $addReq->setEmployeeRequest($request->all());
         return $addReq;
+    }
+
+    private function __createEditRequest(Request $request) {
+        $editReq = new EditEmployeeRequest();
+        $editReq->setEmployeeRequest($request->all());
+        return $editReq;
     }
 }

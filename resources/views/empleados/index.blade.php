@@ -1,8 +1,5 @@
 @extends('layouts.app')
 @section('content')
-<br class="clearfix" />
-<br class="clearfix" />
-<br class="clearfix" />
     <div class="row justify-content-start mb-4">
         <div class="col-1"><a class="btn btn-primary" href="{{ route('nuevo-empleado') }}">Agregar</a></div>
     </div>
