@@ -32,7 +32,7 @@ class AddEmployee {
     /**
      * Método que convierte un AddEmployeeRequest en un modelo de Employee para guardarlo
      * @param AddEmployeeRequest $EmployeeRequest recibe un AddEmployeeRequest
-     * @return Employee regresa una instancia de Domain/Models/Employee Usuario
+     * @return Employee regresa una instancia de Domain/Models/Employee Employee
      */
     private function __requestToEmployee(AddEmployeeRequest $EmployeeRequest): Employee {
         return new Employee(

@@ -32,8 +32,8 @@ class EloquentEmployeeRepository implements EmployeeRepository {
 
     public function update(Employee $emp):bool {
         $empDb = $this->eloquent->find($emp->getEmployeeNumber());
-        $empDb->first_name = $emp->getFirstName();
-        $empDb->last_name = $emp->getLastName();
+        $empDb->firstName = $emp->getFirstName();
+        $empDb->lastName = $emp->getLastName();
         $empDb->extension = $emp->getExtension();
         $empDb->email = $emp->getEmail();
         $empDb->officeCode = $emp->getOfficeCode();

@@ -1,8 +1,9 @@
 <?php
-namespace MyApp\Application\UseCases\AddEmployees;
 
+namespace MyApp\Application\UseCases\EditEmployees;
 
-class AddEmployeeRequest {
+class EditEmployeeRequest {
+    protected $employeeNumber;
     protected $firstName;
     protected $lastName;
     protected $extension;
@@ -19,6 +20,22 @@ class AddEmployeeRequest {
         }
     }
 
+    public function getEmpRequestToArray(): array {
+        return [
+            'employeeNumber' => $this->getEmployeeNumber(),
+            'firstName' => $this->getFirstName(),
+            'lastName' => $this->getLastName(),
+            'extension' => $this->getExtension(),
+            'email' => $this->getEmail(),
+            'officeCode' => $this->getOfficeCode(),
+            'reportsTo' => $this->getReportsTo(),
+            'jobTitle' => $this->getJobTitle(),
+        ];
+    }
+
+    public function setEmployeeNumber(?int $employeeNumber) :void {
+        $this->employeeNumber = $employeeNumber;
+    }
 
     public function setFirstName(?string $firstName) :void {
         $this->firstName = $firstName;
@@ -49,6 +66,10 @@ class AddEmployeeRequest {
     }
 
     //getters
+    public function getEmployeeNumber() :int {
+        return $this->employeeNumber;
+    }
+
     public function getFirstName() :string {
         return $this->firstName;
     }
@@ -76,5 +97,4 @@ class AddEmployeeRequest {
     public function getJobTitle() :string {
         return $this->jobTitle;
     }
-
 }
