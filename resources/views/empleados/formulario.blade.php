@@ -1,9 +1,12 @@
 @extends('layouts.app')
 @section('content')
 <br class="clearfix" />
-<h1>Agregar empleado</h2>
-<form id="frm_employee" method="POST" action="{{ (!empty($id)) ? route('editardatos-empleado', ['id' => $id]) : route('guardar-empleado') }}">
+<h1>{{ (!empty($employee['employeeNumber'])) ? 'Editar empleado' : 'Agregar empleado' }}</h2>
+<form id="frm_employee" method="POST" action="{{ (!empty($employee['employeeNumber'])) ? route('edit-empleado') : route('add-empleado') }}">
     @csrf
+    @if(!empty($employee['employeeNumber'])) 
+    <input type="hidden" name="employeeNumber" value="{{$employee['employeeNumber'] ?? ''}}">
+    @endif
     <div class="form-row mt-3">
         <div class="form-group col-md-5">
             <label for="firstName">Nombre(s)</label>

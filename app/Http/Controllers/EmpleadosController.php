@@ -10,8 +10,10 @@ use MyApp\Domain\Models\Employee\OfficeRepository;
 
 use MyApp\Domain\Models\Employee\EmployeeRepository;
 use MyApp\Application\UseCases\AddEmployees\AddEmployee;
+use MyApp\Application\UseCases\EditEmployees\EditEmployee;
 use MyApp\Application\UseCases\AddEmployees\AddEmployeeRequest;
 use MyApp\Application\UseCases\AddEmployees\AddEmployeeResponse;
+use MyApp\Application\UseCases\EditEmployees\EditEmployeeRequest;
 
 class EmpleadosController extends Controller
 {
@@ -30,14 +32,14 @@ class EmpleadosController extends Controller
         $employee = [];
 
         if ($id != null){
-            $employee = $this->empRepo->detail($id); 
+            $employee = $this->empRepo->detail($id)->toArray(); 
         }
 
         $chiefs = $this->empRepo->list();
         $offices = $this->officeRepo->list();
 
         $viewModel = new FormularioEmpleadoViewModel($employee, $chiefs, $offices);
-        return view('empleados.nuevo', $viewModel);
+        return view('empleados.formulario', $viewModel);
     }
 
     public function detalle($id) {
@@ -67,7 +69,11 @@ class EmpleadosController extends Controller
     public function editar(Request $request, EditEmployee $useCase){
         $editUserReq = $this->__createEditRequest($request);
         $response = $useCase($editUserReq);
-        return response()->json($response);
+        if($response['response'] == Response::RESPONSE_OK) {
+            return redirect()->route('lista-empleados')->with('success', 'Se guardó el empleado exitosamente');
+        }
+
+        return back()->withInput()->with('error','Ocurrió un error al guardar el empleado');
     }
 
     private function __createAddRequest(Request $request) {
