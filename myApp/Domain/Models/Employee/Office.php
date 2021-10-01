@@ -8,32 +8,32 @@ final class Office
     public $officeCode;
     public $city;
     public $phone;
-    public $addressline1;
-    public $addressline2;
+    public $addressLine1;
+    public $addressLine2;
     public $state;
     public $country;
-    public $postalcode;
+    public $postalCode;
     public $territory;
 
     public function __construct(
         string $officeCode,
         string $city,
         string $phone,
-        string $addressline1,
-        ?string $addressline2,
+        string $addressLine1,
+        ?string $addressLine2,
         ?string $state,
         string $country,
-        string $postalcode,
+        string $postalCode,
         string $territory
     ) {
         $this->setOfficeCode($officeCode);
         $this->setCity($city);
         $this->setPhone($phone);
-        $this->setAddressline1($addressline1);
-        $this->setAddressline2($addressline2);
+        $this->setAddressLine1($addressLine1);
+        $this->setAddressLine2($addressLine2);
         $this->setState($state);
         $this->setCountry($country);
-        $this->setPostalcode($postalcode);
+        $this->setPostalCode($postalCode);
         $this->setTerritory($territory);
     }
 
@@ -98,41 +98,41 @@ final class Office
     }
 
     /**
-     * Get the value of addressline1
+     * Get the value of addressLine1
      */ 
-    public function getAddressline1()
+    public function getAddressLine1()
     {
-        return $this->addressline1;
+        return $this->addressLine1;
     }
 
     /**
-     * Set the value of addressline1
+     * Set the value of addressLine1
      *
      * @return  self
      */ 
-    public function setAddressline1($addressline1)
+    public function setAddressLine1($addressLine1)
     {
-        $this->addressline1 = $addressline1;
+        $this->addressLine1 = $addressLine1;
 
         return $this;
     }
 
     /**
-     * Get the value of addressline2
+     * Get the value of addressLine2
      */ 
-    public function getAddressline2()
+    public function getAddressLine2()
     {
-        return $this->addressline2;
+        return $this->addressLine2;
     }
 
     /**
-     * Set the value of addressline2
+     * Set the value of addressLine2
      *
      * @return  self
      */ 
-    public function setAddressline2($addressline2)
+    public function setAddressLine2($addressLine2)
     {
-        $this->addressline2 = $addressline2;
+        $this->addressLine2 = $addressLine2;
 
         return $this;
     }
@@ -178,21 +178,21 @@ final class Office
     }
 
     /**
-     * Get the value of postalcode
+     * Get the value of postalCode
      */ 
-    public function getPostalcode()
+    public function getPostalCode()
     {
-        return $this->postalcode;
+        return $this->postalCode;
     }
 
     /**
-     * Set the value of postalcode
+     * Set the value of postalCode
      *
      * @return  self
      */ 
-    public function setPostalcode($postalcode)
+    public function setPostalCode($postalCode)
     {
-        $this->postalcode = $postalcode;
+        $this->postalCode = $postalCode;
 
         return $this;
     }
@@ -222,11 +222,11 @@ final class Office
                 'officeCode' => $this->officeCode,
                 'city' => $this->city,
                 'phone' => $this->phone,
-                'addressline1' => $this->addressline1,
-                'addressline2' => $this->addressline2,
+                'addressLine1' => $this->addressLine1,
+                'addressLine2' => $this->addressLine2,
                 'state' => $this->state,
                 'country' => $this->country,
-                'postalcode' => $this->postalcode,
+                'postalCode' => $this->postalCode,
                 'territory' => $this->territory
             ];
         }

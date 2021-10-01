@@ -15,11 +15,11 @@ class EloquentOffice extends AppEloquent implements Domainable {
             $this->officeCode,
             $this->city,
             $this->phone,
-            $this->addressline1,
-            $this->addressline2,
+            $this->addressLine1,
+            $this->addressLine2,
             $this->state,
             $this->country,
-            $this->postalcode,
+            $this->postalCode,
             $this->territory
         );
         return $this->office;
@@ -30,11 +30,11 @@ class EloquentOffice extends AppEloquent implements Domainable {
             $this->officeCode,
             $this->city,
             $this->phone,
-            $this->addressline1,
-            $this->addressline2,
+            $this->addressLine1,
+            $this->addressLine2,
             $this->state,
             $this->country,
-            $this->postalcode,
+            $this->postalCode,
             $this->territory
         );
         return $this->office->toArray();
